@@ -1,16 +1,16 @@
 --[[
-     _      ___         ____  ______
-    | | /| / (_)__  ___/ / / / /  _/
-    | |/ |/ / / _ \/ _  / /_/ // /  
-    |__/|__/_/_//_/\_,_/\____/___/
-    
-    v1.6.66  |  2026-10-07  |  Roblox UI Library for scripts
-    
-    To view the source code, see the `src/` folder on the official GitHub repository.
-    
-    Author: Angry66gsjjd (Angry66gsjjd/My-Library, Angry66gsjjd/My-Library, Angry66gsjjd/My-Library)
-    Github: https://github.com/Angry66gsjjd/PainKillersUI
-    Discord: https://discord.ggAngry66gsjjd/My-Library-development-hub-1300692552005189632
+   ____             _       _ _ _                 _   _ ___ 
+  |  _ \ __ _ _   _| |     | (_) |_ ___ _ __     | | | |_ _|
+  | |_) / _` | | | | |_____| | | __/ _ \ '__|____| | | || | 
+  |  __/ (_| | |_| | |_____| | | ||  __/ | |_____| |_| || | 
+  |_|   \__,_|\__, |_|     |_|_|\__\___|_|        \___/|___|
+              |___/                                         
+
+    PainKillerUI  |  2026  |  Roblox UI Library for scripts
+
+    Author: Angry66gsjjd (PainKillers)
+    Github: https://github.com/Angry66gsjjd/My-Library
+    Telegram: https://t.me/PainKillersClan (soon)
     License: MIT
 ]]
 
@@ -22,7 +22,7 @@ Height:number?,
 Focused:boolean,
 
 Window:any,
-PainKillersUI:any,
+PainKillers:any,
 Tab:any,
 Parent:Instance,
 }local a a={cache={}, load=function(b)if not a.cache[b]then a.cache[b]={c=a[b]()}end return a.cache[b].c end}do function a.a()
@@ -24505,22 +24505,22 @@ IconThemeTag=nil,
 
 Icons={
 lucide=IsExploit()and Loadstring(
-Get"https://raw.githubusercontent.com/Angry66gsjjd/Icons/refs/heads/main/lucide/dist/Icons.lua"
+Get"https://raw.githubusercontent.com/Angry66gsjjd/My-Library/main/icons/lucide.lua"
 )()or a.load'b',
 solar=IsExploit()and Loadstring(
-Get"https://raw.githubusercontent.com/Angry66gsjjd/Icons/refs/heads/main/solar/dist/Icons.lua"
+Get"https://raw.githubusercontent.com/Angry66gsjjd/My-Library/main/icons/solar.lua"
 )()or a.load'c',
 craft=IsExploit()and Loadstring(
-Get"https://raw.githubusercontent.com/Angry66gsjjd/Icons/refs/heads/main/craft/dist/Icons.lua"
+Get"https://raw.githubusercontent.com/Angry66gsjjd/My-Library/main/icons/craft.lua"
 )()or a.load'd',
 geist=IsExploit()and Loadstring(
-Get"https://raw.githubusercontent.com/Angry66gsjjd/Icons/refs/heads/main/geist/dist/Icons.lua"
+Get"https://raw.githubusercontent.com/Angry66gsjjd/My-Library/main/icons/geist.lua"
 )()or a.load'e',
 sfsymbols=IsExploit()and Loadstring(
-Get"https://raw.githubusercontent.com/Angry66gsjjd/Icons/refs/heads/main/sfsymbols/dist/Icons.lua"
+Get"https://raw.githubusercontent.com/Angry66gsjjd/My-Library/main/icons/sfsymbols.lua"
 )()or a.load'f',
 gravity=IsExploit()and Loadstring(
-Get"https://raw.githubusercontent.com/Angry66gsjjd/Icons/refs/heads/main/gravity/dist/Icons.lua"
+Get"https://raw.githubusercontent.com/Angry66gsjjd/My-Library/main/icons/gravity.lua"
 )()or a.load'g',
 },
 }
@@ -25015,7 +25015,7 @@ if not u then
 if m and m.Window and m.Window.Debug then local
 x, z=v:find":%d+: "
 
-warn("[ PainKillersUI: DEBUG Mode ] "..v)
+warn("[ PainKillers: DEBUG Mode ] "..v)
 
 return m:Notify{
 Title="DEBUG Mode: Error",
@@ -25643,7 +25643,7 @@ Colors={
 }.IconFrame
 J.Parent=H
 elseif string.find(v,"http")and not string.find(v,"roblox.com")then
-local J="PainKillersUI/"..A.."/assets/."..B.."-"..x..".png"
+local J="PainKillers/"..A.."/assets/."..B.."-"..x..".png"
 local L,M=pcall(function()
 task.spawn(function()
 local L=p.Request
@@ -25664,7 +25664,7 @@ H.ImageLabel.Image=N
 else
 warn(
 string.format(
-"[ PainKillersUI.Creator ] Failed to load custom asset '%s': %s",
+"[ PainKillers.Creator ] Failed to load custom asset '%s': %s",
 J,
 tostring(N)
 )
@@ -25677,7 +25677,7 @@ end)
 end)
 if not L then
 warn(
-"[ PainKillersUI.Creator ]  '"..identifyexecutor()
+"[ PainKillers.Creator ]  '"..identifyexecutor()
 or"Studio".."' doesnt support the URL Images. Error: "..M
 )
 
@@ -26727,11 +26727,11 @@ New=a.load'p'.New
 
 return[[
 {
-    "name": "windui",
-    "version": "1.6.66",
+    "name": "PainKillerUI",
+    "version": "1.0.0",
     "main": "./dist/main.lua",
-    "repository": "https://github.com/Angry66gsjjd/PainKillersUI",
-    "discord": "https://discord.ggAngry66gsjjd/My-Library-development-hub-1300692552005189632",
+    "repository": "https://github.com/Angry66gsjjd/My-Library",
+    "telegram": "https://t.me/PainKillersClan",
     "author": "Angry66gsjjd",
     "description": "Roblox UI Library for scripts",
     "license": "MIT",
@@ -26744,6 +26744,18 @@ return[[
         "example-live-build": "INPUT_FILE=main_example.lua npm run live-build",
         "updater": "python3 updater/main.py"
     },
+    "keywords": [
+        "ui-library",
+        "ui-design",
+        "script",
+        "script-hub",
+        "exploiting"
+    ],
+    "devDependencies": {
+        "chokidar-cli": "^3.0.0",
+        "concurrently": "^9.2.0"
+    }
+},
     "keywords": [
         "ui-library",
         "ui-design",
@@ -27051,7 +27063,7 @@ UICorner=28,
 UIPadding=12,
 
 Window=ag,
-PainKillersUI=ah,
+PainKillers=ah,
 
 UIElements={},
 }
@@ -27224,7 +27236,7 @@ local af=a.load't'.New
 
 function aa.new(ag,ah,ai,aj)
 local ak=a.load'u'
-local al=ak.Create(true,"Popup",ag.Window,ag.PainKillersUI,ag.PainKillersUI.ScreenGui.KeySystem)
+local al=ak.Create(true,"Popup",ag.Window,ag.PainKillers,ag.PainKillers.ScreenGui.KeySystem)
 
 local am={}
 
@@ -27520,7 +27532,7 @@ PaddingBottom=UDim.new(0,10),
 })
 
 for i,l in next,ag.KeySystem.API do
-local m=ag.PainKillersUI.Services[l.Type]
+local m=ag.PainKillers.Services[l.Type]
 if m then
 local p={}
 for r,u in next,m.Args do
@@ -27606,7 +27618,7 @@ ad(v,0.08,{ImageTransparency=1}):Play()
 end)
 ab.AddSignal(v.MouseButton1Click,function()
 r.Copy()
-ag.PainKillersUI:Notify{
+ag.PainKillers:Notify{
 Title="Key System",
 Content="Key link copied to clipboard.",
 Image="key",
@@ -27662,7 +27674,7 @@ task.wait(0.4)
 ai(true)
 end
 else
-ag.PainKillersUI:Notify{
+ag.PainKillers:Notify{
 Title="Key System. Error",
 Content="Invalid key.",
 Icon="triangle-alert",
@@ -27695,7 +27707,7 @@ end
 if b then
 handleSuccess(aA)
 else
-ag.PainKillersUI:Notify{
+ag.PainKillers:Notify{
 Title="Key System. Error",
 Content=d,
 Icon="triangle-alert",
@@ -27998,7 +28010,6 @@ ZIndex=2,
 }),
 })
 
-
 local af
 
 task.wait()
@@ -28091,7 +28102,7 @@ IconSize=22,
 }
 
 local ah=a.load'u'
-local ai=ah.Create(true,"Popup",ae.PainKillersUI.Window,ae.PainKillersUI,af)
+local ai=ah.Create(true,"Popup",ae.PainKillers.Window,ae.PainKillers,af)
 
 local aj=200
 
@@ -28112,7 +28123,7 @@ al=ab.Image(
 ag.Icon,
 ag.Title..":"..ag.Icon,
 0,
-ae.PainKillersUI.Window,
+ae.PainKillers.Window,
 "Popup",
 true,
 ae.IconThemed,
@@ -29153,17 +29164,17 @@ end
 
 function ae.Init(af,ag)
 if not ag.Folder then
-warn"[ PainKillersUI.ConfigManager ] Window.Folder is not specified."
+warn"[ PainKillers.ConfigManager ] Window.Folder is not specified."
 return false
 end
 if ab:IsStudio()or not writefile then
-warn"[ PainKillersUI.ConfigManager ] The config system doesn't work in the studio."
+warn"[ PainKillers.ConfigManager ] The config system doesn't work in the studio."
 return false
 end
 
 ad=ag
 ae.Folder=ad.Folder
-ae.Path="PainKillersUI/"..tostring(ae.Folder).."/config/"
+ae.Path="PainKillers/"..tostring(ae.Folder).."/config/"
 
 if not isfolder(ae.Path)then
 makefolder(ae.Path)
@@ -29182,7 +29193,7 @@ end
 
 function ae.SetPath(af,ag)
 if not ag then
-warn"[ PainKillersUI.ConfigManager ] Custom path is not specified."
+warn"[ PainKillers.ConfigManager ] Custom path is not specified."
 return false
 end
 
@@ -29266,7 +29277,7 @@ end
 
 local ak,al=pcall(function()
 local ak=readfile or function()
-warn"[ PainKillersUI.ConfigManager ] The config system doesn't work in the studio."
+warn"[ PainKillers.ConfigManager ] The config system doesn't work in the studio."
 return nil
 end
 return ac:JSONDecode(ak(ai.Path))
@@ -29353,9 +29364,9 @@ local al,am=pcall(function()
 return ai:Load()
 end)
 if al then
-if ad.Debug then print("[ PainKillersUI.ConfigManager ] AutoLoaded config: "..ag)end
+if ad.Debug then print("[ PainKillers.ConfigManager ] AutoLoaded config: "..ag)end
 else
-warn("[ PainKillersUI.ConfigManager ] Failed to AutoLoad config: "..ag.." - "..tostring(am))
+warn("[ PainKillers.ConfigManager ] Failed to AutoLoad config: "..ag.." - "..tostring(am))
 end
 end)
 end
@@ -31138,7 +31149,7 @@ at:Disconnect()
 at=nil
 end
 
-al.PainKillersUI.CurrentInput=nil
+al.PainKillers.CurrentInput=nil
 
 if b then
 return
@@ -31377,7 +31388,7 @@ end
 
 ai:Set(ak,false,ah.Window.NewElements)
 
-local an=ah.PainKillersUI.GenerateGUID()
+local an=ah.PainKillers.GenerateGUID()
 
 if ah.Window.NewElements and am.Animate then
 if ai.Type=="Toggle"then
@@ -31389,11 +31400,11 @@ ao.UserInputType==Enum.UserInputType.MouseButton1
 or ao.UserInputType==Enum.UserInputType.Touch
 )
 then
-if ah.PainKillersUI.CurrentInput and ah.PainKillersUI.CurrentInput~=an then
+if ah.PainKillers.CurrentInput and ah.PainKillers.CurrentInput~=an then
 return
 end
 
-ah.PainKillersUI.CurrentInput=an
+ah.PainKillers.CurrentInput=an
 am:Animate(ao,ai)
 end
 end)
@@ -31724,7 +31735,7 @@ ao:Disconnect()
 ai=false
 ay.ScrollingEnabled=true
 
-ak.PainKillersUI.CurrentInput=nil
+ak.PainKillers.CurrentInput=nil
 
 if ak.Window.NewElements then
 ag(al.UIElements.SliderIcon.Frame.Thumb,0.2,{
@@ -31804,7 +31815,7 @@ end
 end
 end)
 
-local az=ak.PainKillersUI.GenerateGUID()
+local az=ak.PainKillers.GenerateGUID()
 
 ae.AddSignal(al.UIElements.SliderContainer.InputBegan,function(aA)
 if al.Locked or ai then
@@ -31814,10 +31825,10 @@ if
 aA.UserInputType==Enum.UserInputType.MouseButton1
 or aA.UserInputType==Enum.UserInputType.Touch
 then
-if ak.PainKillersUI.CurrentInput and ak.PainKillersUI.CurrentInput~=az then
+if ak.PainKillers.CurrentInput and ak.PainKillers.CurrentInput~=az then
 return
 end
-ak.PainKillersUI.CurrentInput=az
+ak.PainKillers.CurrentInput=az
 
 al:Set(ap,aA)
 
@@ -32545,7 +32556,7 @@ Position=UDim2.new(-10,0,-10,0),
 Visible=false,
 Active=false,
 
-Parent=ao.PainKillersUI.DropdownGui,
+Parent=ao.PainKillers.DropdownGui,
 AnchorPoint=Vector2.new(1,0),
 },{
 ap.UIElements.Menu,
@@ -32561,7 +32572,7 @@ UDim2.fromOffset(0,ap.UIElements.UIListLayout.AbsoluteContentSize.Y)
 end
 
 local function RecalculateListSize()
-local at=ao.PainKillersUI.DropdownGui.AbsoluteSize.Y
+local at=ao.PainKillers.DropdownGui.AbsoluteSize.Y
 
 local au=ap.UIElements.UIListLayout.AbsoluteContentSize.Y/ao.UIScale
 local av=ap.SearchBarEnabled and(aq.SearchBarHeight+(aq.MenuPadding*3))
@@ -33822,7 +33833,7 @@ am.OnCopy()
 end
 end)
 if not ap then
-al.PainKillersUI:Notify{
+al.PainKillers:Notify{
 Title="Error",
 Content="The "..ao.." is not copied. Error: "..aq,
 Icon="x",
@@ -33830,7 +33841,7 @@ Duration=5,
 }
 end
 end
-end,al.PainKillersUI.UIScale)
+end,al.PainKillers.UIScale)
 
 function am.SetCode(ap,aq)
 ao.Set(aq)
@@ -34733,7 +34744,7 @@ aa.AddSignal(aw.UIElements.Colorpicker.MouseButton1Click,function()
 if ax and not aw.IsShowed then
 aw.IsShowed=true
 
-as:Colorpicker(aw,av.Window,av.PainKillersUI,function(ay,az)
+as:Colorpicker(aw,av.Window,av.PainKillers,function(ay,az)
 aw:Update(ay,az)
 aw.Default=ay
 aw.Transparency=az
@@ -34977,7 +34988,7 @@ end)
 
 local av=am.ElementsModule
 
-av.Load(an,au.Outline.Content,av.Elements,am.Window,am.PainKillersUI,function()
+av.Load(an,au.Outline.Content,av.Elements,am.Window,am.PainKillers,function()
 if not an.Expandable then
 an.Expandable=true
 aq.Visible=true
@@ -35247,7 +35258,7 @@ am,
 an,
 ao.Elements,
 al.Window,
-al.PainKillersUI,
+al.PainKillers,
 function(ap,aq)
 local ar=al.Tab and al.Tab.Gap or(al.Window.NewElements and 1 or 6)
 
@@ -35333,7 +35344,7 @@ am,
 an,
 ao.Elements,
 al.Window,
-al.PainKillersUI,
+al.PainKillers,
 function(ap,aq)
 local ar=al.Tab and al.Tab.Gap or(al.Window.NewElements and 1 or 6)
 
@@ -35433,7 +35444,7 @@ am,
 an,
 ao.Elements,
 al.Window,
-al.PainKillersUI,
+al.PainKillers,
 
 
 
@@ -35560,7 +35571,7 @@ and au.Y>=av.Y
 and au.Y<=av.Y+aw.Y
 end
 
-local au=an.PainKillersUI.GenerateGUID()
+local au=an.PainKillers.GenerateGUID()
 
 ai.AddSignal(at.CanvasGroup.Viewport.MouseEnter,function()
 if ao.Interactive then
@@ -35583,11 +35594,11 @@ if
 (av.UserInputType==Enum.UserInputType.MouseButton1)
 or(av.UserInputType==Enum.UserInputType.Touch and not aq)
 then
-if an.PainKillersUI.CurrentInput and an.PainKillersUI.CurrentInput~=au then
+if an.PainKillers.CurrentInput and an.PainKillers.CurrentInput~=au then
 return
 end
 
-an.PainKillersUI.CurrentInput=au
+an.PainKillers.CurrentInput=au
 
 ap=true
 as=av.Position
@@ -35601,11 +35612,11 @@ if
 av.UserInputType==Enum.UserInputType.MouseButton1
 or av.UserInputType==Enum.UserInputType.Touch
 then
-if an.PainKillersUI.CurrentInput and an.PainKillersUI.CurrentInput~=au then
+if an.PainKillers.CurrentInput and an.PainKillers.CurrentInput~=au then
 return
 end
 
-an.PainKillersUI.CurrentInput=nil
+an.PainKillers.CurrentInput=nil
 
 ap=false
 end
@@ -35755,7 +35766,7 @@ at.Index=#aa.Elements+1
 at.GlobalIndex=#ak.AllElements+1
 at.Parent=af
 at.Window=ak
-at.PainKillersUI=al
+at.PainKillers=al
 at.UIScale=ao
 at.ElementsModule=an local
 
@@ -35779,7 +35790,7 @@ if ay then
 ak.PendingConfigData[at.Flag]=nil
 else
 warn(
-"[ PainKillersUI ] Failed to apply pending config for '"
+"[ PainKillers ] Failed to apply pending config for '"
 ..at.Flag
 .."': "
 ..tostring(az)
@@ -35904,7 +35915,7 @@ OnChangeFunc=function(ao)end,
 
 function ao.Init(ap,aq,ar,as)
 Window=ap
-PainKillersUI=aq
+PainKillers=aq
 ao.ToolTipParent=ar
 ao.TabHighlight=as
 return ao
@@ -36233,7 +36244,7 @@ ar.UIElements.ContainerFrame,
 ar.UIElements.ContainerFrameCanvas.ScrollSliderHolder,
 Window,
 4,
-PainKillersUI
+PainKillers
 )
 end
 
@@ -36331,7 +36342,7 @@ ar,
 ar.UIElements.ContainerFrame,
 aA.Elements,
 Window,
-PainKillersUI,
+PainKillers,
 nil,
 aA,
 aq,
@@ -37380,11 +37391,11 @@ aw.Topbar={Height=52,ButtonsType="Default"}
 end
 
 if not ai:IsStudio()and aw.Folder and writefile then
-if not isfolder("PainKillersUI/"..aw.Folder)then
-makefolder("PainKillersUI/"..aw.Folder)
+if not isfolder("PainKillers/"..aw.Folder)then
+makefolder("PainKillers/"..aw.Folder)
 end
-if not isfolder("PainKillersUI/"..aw.Folder.."/assets")then
-makefolder("PainKillersUI/"..aw.Folder.."/assets")
+if not isfolder("PainKillers/"..aw.Folder.."/assets")then
+makefolder("PainKillers/"..aw.Folder.."/assets")
 end
 if not isfolder(aw.Folder)then
 makefolder(aw.Folder)
@@ -37532,7 +37543,7 @@ aw.UIElements.SideBar,
 aw.UIElements.SideBarContainer.Content,
 aw,
 3,
-av.PainKillersUI
+av.PainKillers
 )
 end
 
@@ -37818,7 +37829,7 @@ Headers={["User-Agent"]="Roblox/Exploit"},
 writefile(u,v)
 end)
 if not v then
-warn("[ PainKillersUI.Window.Background ] Failed to download video: "..tostring(x))
+warn("[ PainKillers.Window.Background ] Failed to download video: "..tostring(x))
 end
 end
 
@@ -37826,9 +37837,9 @@ local v,x=pcall(function()
 return getcustomasset(u)
 end)
 if not v then
-warn("[ PainKillersUI.Window.Background ] Failed to load custom asset: "..tostring(x))
+warn("[ PainKillers.Window.Background ] Failed to load custom asset: "..tostring(x))
 end
-warn"[ PainKillersUI.Window.Background ] VideoFrame may not work with custom video"
+warn"[ PainKillers.Window.Background ] VideoFrame may not work with custom video"
 m=x
 end
 
@@ -37977,7 +37988,7 @@ AnchorPoint=Vector2.new(0.5,0.5),
 Active=true,
 
 },{
-av.PainKillersUI.UIScaleObj,
+av.PainKillers.UIScaleObj,
 aw.AcrylicPaint and aw.AcrylicPaint.Frame or nil,
 d,
 an.NewRoundFrame(aw.UICorner,"Squircle",{
@@ -37995,7 +38006,6 @@ l,
 u,
 az,
 }),
-
 
 
 
@@ -38126,19 +38136,19 @@ PaddingBottom=UDim.new(0,aw.UIPadding),
 an.AddSignal(aw.UIElements.Main.Main.Topbar.Left:GetPropertyChangedSignal"AbsoluteSize",function()
 local A=0
 local B=aw.UIElements.Main.Main.Topbar.Right.UIListLayout.AbsoluteContentSize.X
-/av.PainKillersUI.UIScale
+/av.PainKillers.UIScale
 
-A=aw.UIElements.Main.Main.Topbar.Left.AbsoluteSize.X/av.PainKillersUI.UIScale
+A=aw.UIElements.Main.Main.Topbar.Left.AbsoluteSize.X/av.PainKillers.UIScale
 if aw.Topbar.ButtonsType~="Default"then
 A=A+B+aw.UIPadding-4
 end
 
 aw.UIElements.Main.Main.Topbar.Center.Position=
-UDim2.new(0,A+(aw.UIPadding/av.PainKillersUI.UIScale),0.5,0)
+UDim2.new(0,A+(aw.UIPadding/av.PainKillers.UIScale),0.5,0)
 aw.UIElements.Main.Main.Topbar.Center.Size=UDim2.new(
 1,
 -A
--(aw.UIPadding/av.PainKillersUI.UIScale)
+-(aw.UIPadding/av.PainKillers.UIScale)
 -(aw.Topbar.ButtonsType=="Default"and B+aw.UIPadding or 0),
 1,
 0
@@ -38149,7 +38159,7 @@ if aw.Topbar.ButtonsType~="Default"then
 an.AddSignal(aw.UIElements.Main.Main.Topbar.Right:GetPropertyChangedSignal"AbsoluteSize",function()
 aw.UIElements.Main.Main.Topbar.Left.Position=UDim2.new(
 0,
-(aw.UIElements.Main.Main.Topbar.Right.AbsoluteSize.X/av.PainKillersUI.UIScale)+aw.UIPadding-4,
+(aw.UIElements.Main.Main.Topbar.Right.AbsoluteSize.X/av.PainKillers.UIScale)+aw.UIPadding-4,
 0,
 0
 )
@@ -38347,7 +38357,7 @@ end
 aw.UIElements.BackgroundGradient=an.NewRoundFrame(aw.UICorner,"Squircle",{
 Size=UDim2.new(1,0,1,0),
 Parent=aw.UIElements.Main.Background,
-ImageTransparency=aw.Transparent and av.PainKillersUI.TransparencyValue or 0,
+ImageTransparency=aw.Transparent and av.PainKillers.TransparencyValue or 0,
 },{
 B,
 })
@@ -38447,7 +38457,7 @@ end
 
 function aw.SetBackgroundTransparency(B,C)
 local F=math.floor(tonumber(C)*10+0.5)/10
-av.PainKillersUI.TransparencyValue=F
+av.PainKillers.TransparencyValue=F
 aw:ToggleTransparency(F>0)
 end
 
@@ -38472,9 +38482,9 @@ local function SetSize(F)
 ap(aw.UIElements.Main,0.45,{
 Size=not aw.IsFullscreen and C or UDim2.new(
 0,
-(av.PainKillersUI.ScreenGui.AbsoluteSize.X-20)/av.PainKillersUI.UIScale,
+(av.PainKillers.ScreenGui.AbsoluteSize.X-20)/av.PainKillers.UIScale,
 0,
-(av.PainKillersUI.ScreenGui.AbsoluteSize.Y-20-52)/av.PainKillersUI.UIScale
+(av.PainKillers.ScreenGui.AbsoluteSize.Y-20-52)/av.PainKillers.UIScale
 ),
 },Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 
@@ -38508,7 +38518,7 @@ aw.IsFullscreen=not G
 SetSize(true)
 end
 
-an.AddSignal(av.PainKillersUI.ScreenGui:GetPropertyChangedSignal"AbsoluteSize",function()
+an.AddSignal(av.PainKillers.ScreenGui:GetPropertyChangedSignal"AbsoluteSize",function()
 if aw.IsFullscreen then
 SetSize()
 end
@@ -38552,7 +38562,7 @@ function aw.OnDestroy(F,G)
 aw.OnDestroyCallback=G
 end
 
-if av.PainKillersUI.UseAcrylic then
+if av.PainKillers.UseAcrylic then
 aw.AcrylicPaint.AddParent(aw.UIElements.Main)
 end
 
@@ -38601,7 +38611,7 @@ end
 aw.UIElements.Main.Background.ImageTransparency=1
 ap(aw.UIElements.Main.Background,0.4,{
 
-ImageTransparency=aw.Transparent and av.PainKillersUI.TransparencyValue or 0,
+ImageTransparency=aw.Transparent and av.PainKillers.TransparencyValue or 0,
 },Enum.EasingStyle.Exponential,Enum.EasingDirection.Out):Play()
 
 if l then
@@ -38664,7 +38674,7 @@ aw.UIElements.Main.Visible=true
 
 aw.UIElements.Main:WaitForChild"Main".Visible=true
 
-av.PainKillersUI:ToggleAcrylic(true)
+av.PainKillers:ToggleAcrylic(true)
 
 end)
 end
@@ -38681,7 +38691,7 @@ an.SafeCallback(aw.OnCloseCallback)
 end)
 end
 
-av.PainKillersUI:ToggleAcrylic(false)
+av.PainKillers:ToggleAcrylic(false)
 
 if aw.UIElements.Main and aw.UIElements.Main:WaitForChild"Main"then
 aw.UIElements.Main.Main.Visible=false
@@ -38773,10 +38783,10 @@ aw.Destroyed=true
 
 task.wait(0.4)
 
-av.PainKillersUI.ScreenGui:Destroy()
-av.PainKillersUI.NotificationGui:Destroy()
-av.PainKillersUI.DropdownGui:Destroy()
-av.PainKillersUI.TooltipGui:Destroy()
+av.PainKillers.ScreenGui:Destroy()
+av.PainKillers.NotificationGui:Destroy()
+av.PainKillers.DropdownGui:Destroy()
+av.PainKillers.TooltipGui:Destroy()
 
 an.DisconnectAll()
 
@@ -38800,9 +38810,9 @@ end
 function aw.ToggleTransparency(F,G)
 
 aw.Transparent=G
-av.PainKillersUI.Transparent=G
+av.PainKillers.Transparent=G
 
-aw.UIElements.Main.Background.ImageTransparency=G and av.PainKillersUI.TransparencyValue or 0
+aw.UIElements.Main.Background.ImageTransparency=G and av.PainKillers.TransparencyValue or 0
 
 
 end
@@ -38845,12 +38855,12 @@ return G
 end
 
 function aw.GetUIScale(F,G)
-return av.PainKillersUI.UIScale
+return av.PainKillers.UIScale
 end
 
 function aw.SetUIScale(F,G)
-av.PainKillersUI.UIScale=G
-ap(av.PainKillersUI.UIScaleObj,0.2,{Scale=G},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
+av.PainKillers.UIScale=G
+ap(av.PainKillers.UIScaleObj,0.2,{Scale=G},Enum.EasingStyle.Quint,Enum.EasingDirection.Out):Play()
 return aw
 end
 
@@ -38932,7 +38942,7 @@ end
 
 local F=a.load'ag'
 local G=a.load'ah'
-local H=F.Init(aw,av.PainKillersUI,av.PainKillersUI.TooltipGui)
+local H=F.Init(aw,av.PainKillers,av.PainKillers.TooltipGui)
 H:OnChange(function(J)
 aw.CurrentTab=J
 end)
@@ -38941,7 +38951,7 @@ aw.TabModule=H
 
 function aw.Tab(J,L)
 L.Parent=aw.UIElements.SideBar.Frame
-return H.New(L,av.PainKillersUI.UIScale)
+return H.New(L,av.PainKillers.UIScale)
 end
 
 function aw.SelectTab(J,L)
@@ -38953,7 +38963,7 @@ return G.New(
 L,
 aw.UIElements.SideBar.Frame,
 aw.Folder,
-av.PainKillersUI.UIScale,
+av.PainKillers.UIScale,
 aw
 )
 end
@@ -39015,7 +39025,7 @@ Buttons=M.Buttons or{},
 
 TextPadding=14,
 }
-local O=J.Create(false,"Dialog",aw,av.PainKillersUI,aw.UIElements.Main.Main)
+local O=J.Create(false,"Dialog",aw,av.PainKillers,aw.UIElements.Main.Main)
 
 O.UIElements.Main.Size=UDim2.new(0,N.Width,0,0)
 
@@ -39254,7 +39264,7 @@ N.Window=aw
 return at:New(N,aw.UIElements.Main.Main.Topbar.Center.Holder)
 end
 
-local M=av.PainKillersUI.GenerateGUID()
+local M=av.PainKillers.GenerateGUID()
 
 local function startResizing(N)
 if aw.CanResize then
@@ -39268,11 +39278,11 @@ ap(az.ImageLabel,0.1,{ImageTransparency=0.35}):Play()
 
 an.AddSignal(N.Changed,function()
 if N.UserInputState==Enum.UserInputState.End then
-if av.PainKillersUI.CurrentInput and av.PainKillersUI.CurrentInput~=M then
+if av.PainKillers.CurrentInput and av.PainKillers.CurrentInput~=M then
 return
 end
 
-av.PainKillersUI.CurrentInput=nil
+av.PainKillers.CurrentInput=nil
 
 isResizing=false
 aB.Active=false
@@ -39289,10 +39299,10 @@ if
 N.UserInputType==Enum.UserInputType.MouseButton1
 or N.UserInputType==Enum.UserInputType.Touch
 then
-if av.PainKillersUI.CurrentInput and av.PainKillersUI.CurrentInput~=M then
+if av.PainKillers.CurrentInput and av.PainKillers.CurrentInput~=M then
 return
 end
-av.PainKillersUI.CurrentInput=M
+av.PainKillers.CurrentInput=M
 
 if aw.CanResize then
 startResizing(N)
@@ -39326,7 +39336,7 @@ end
 end)
 
 an.AddSignal(az.MouseEnter,function()
-if av.PainKillersUI.CurrentInput and av.PainKillersUI.CurrentInput~=M then
+if av.PainKillers.CurrentInput and av.PainKillers.CurrentInput~=M then
 return
 end
 if not isResizing then
@@ -39334,7 +39344,7 @@ ap(az.ImageLabel,0.1,{ImageTransparency=0.35}):Play()
 end
 end)
 an.AddSignal(az.MouseLeave,function()
-if av.PainKillersUI.CurrentInput and av.PainKillersUI.CurrentInput~=M then
+if av.PainKillers.CurrentInput and av.PainKillers.CurrentInput~=M then
 return
 end
 if not isResizing then
@@ -39584,7 +39594,7 @@ Scale=aa.UIScale,
 aa.UIScaleObj=ax
 
 aa.ScreenGui=at("ScreenGui",{
-Name="PainKillersUI",
+Name="PainKillers",
 Parent=aw,
 IgnoreGuiInset=true,
 ScreenInsets="None",
@@ -39612,17 +39622,17 @@ Name="ToolTips",
 })
 
 aa.NotificationGui=at("ScreenGui",{
-Name="PainKillersUI/Notifications",
+Name="PainKillers/Notifications",
 Parent=aw,
 IgnoreGuiInset=true,
 })
 aa.DropdownGui=at("ScreenGui",{
-Name="PainKillersUI/Dropdowns",
+Name="PainKillers/Dropdowns",
 Parent=aw,
 IgnoreGuiInset=true,
 })
 aa.TooltipGui=at("ScreenGui",{
-Name="PainKillersUI/Tooltips",
+Name="PainKillers/Tooltips",
 Parent=aw,
 IgnoreGuiInset=true,
 })
@@ -39772,7 +39782,7 @@ return f
 end
 
 function aa.Popup(az,aA)
-aA.PainKillersUI=aa
+aA.PainKillers=aa
 return a.load'A'.new(aA,aa.ScreenGui.Popups)
 end
 
@@ -39787,8 +39797,8 @@ function aa.CreateWindow(az,aA)
 local aB=a.load'ak'
 
 if not am:IsStudio()and writefile then
-if not isfolder"PainKillersUI"then
-makefolder"PainKillersUI"
+if not isfolder"PainKillers"then
+makefolder"PainKillers"
 end
 if aA.Folder then
 makefolder(aA.Folder)
@@ -39797,7 +39807,7 @@ makefolder(aA.Title)
 end
 end
 
-aA.PainKillersUI=aa
+aA.PainKillers=aa
 aA.Window=aa.Window
 aA.Parent=aa.ScreenGui.Window
 
