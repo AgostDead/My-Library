@@ -39567,9 +39567,9 @@ end)
 
 local ap=ak.LocalPlayer or nil
 
-local aq=ai:JSONDecode(a.load'r')
+local aq = nil
 if aq then
-aa.Version=aq.version
+    aa.Version=aq.version
 end
 
 local ar=a.load'v'
