@@ -126,14 +126,24 @@ function Button.New(Title, Icon, Callback, Variant, Parent, Dialog, FullRounded,
 		}),
 	})
 
+	local ButtonUIScale = New("UIScale", { Scale = 1, Parent = ButtonFrame })
+
 	Creator.AddSignal(ButtonFrame.MouseEnter, function()
-		Tween(ButtonFrame.Frame, 0.047, { ImageTransparency = 0.95 }):Play()
+		Tween(ButtonFrame.Frame, 0.15, { ImageTransparency = 0.93 }):Play()
+		Tween(ButtonUIScale, 0.15, { Scale = 1.03 }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
 	end)
 	Creator.AddSignal(ButtonFrame.MouseLeave, function()
-		Tween(ButtonFrame.Frame, 0.047, { ImageTransparency = 1 }):Play()
+		Tween(ButtonFrame.Frame, 0.15, { ImageTransparency = 1 }):Play()
+		Tween(ButtonUIScale, 0.15, { Scale = 1 }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
+	end)
+	Creator.AddSignal(ButtonFrame.MouseButton1Down, function()
+		Tween(ButtonUIScale, 0.08, { Scale = 0.95 }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
+	end)
+	Creator.AddSignal(ButtonFrame.MouseButton1Up, function()
+		Tween(ButtonUIScale, 0.35, { Scale = 1 }, Enum.EasingStyle.Back, Enum.EasingDirection.Out):Play()
 	end)
 	Creator.AddSignal(ButtonFrame.MouseButton1Click, function()
-		if Dialog then --idk
+		if Dialog then
 			Dialog:Close()()
 		end
 		if Callback then

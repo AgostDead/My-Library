@@ -711,6 +711,8 @@ return function(Config)
 		},
 	})
 
+	local WindowUIScale = New("UIScale", { Scale = 1 })
+
 	Window.UIElements.Main = New("Frame", {
 		Size = UDim2.new(Window.Size.X.Scale, Window.Size.X.Offset, 0, 0),
 		Position = Window.Position,
@@ -720,6 +722,7 @@ return function(Config)
 		Active = true,
 		--GroupTransparency = 1,
 	}, {
+		WindowUIScale,
 		Config.PainKillersUI.UIScaleObj,
 		Window.AcrylicPaint and Window.AcrylicPaint.Frame or nil,
 		Blur,
@@ -1330,8 +1333,11 @@ return function(Config)
 
 			Window.UIElements.Main.Size = UDim2.new(Window.Size.X.Scale, Window.Size.X.Offset, 0, 100)
 
-			Tween(Window.UIElements.Main, 0.8, {
-				--GroupTransparency = 0,
+			-- Spring scale при открытии
+			WindowUIScale.Scale = 0.92
+			Tween(WindowUIScale, 0.55, { Scale = 1 }, Enum.EasingStyle.Back, Enum.EasingDirection.Out):Play()
+
+			Tween(Window.UIElements.Main, 0.65, {
 				Size = Window.Size,
 			}, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
 
@@ -1433,8 +1439,10 @@ return function(Config)
 		Window.CanDropdown = false
 		Window.Closed = true
 
-		Tween(Window.UIElements.Main, 0.9, {
-			--GroupTransparency = 1,
+		-- Scale shrink при закрытии
+		Tween(WindowUIScale, 0.3, { Scale = 0.93 }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
+
+		Tween(Window.UIElements.Main, 0.55, {
 			Size = UDim2.new(Window.Size.X.Scale, Window.Size.X.Offset, 0, 0),
 		}, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
 		if Window.UIElements.BackgroundGradient then
