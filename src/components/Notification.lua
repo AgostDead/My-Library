@@ -3,14 +3,37 @@ local New = Creator.New
 local Tween = Creator.Tween
 
 local NotificationModule = {
-	Size = UDim2.new(0, 300, 1, -100 - 56),
-	SizeLower = UDim2.new(0, 300, 1, -56),
-	UICorner = 18,
+	Size = UDim2.new(0, 320, 1, -100 - 56),
+	SizeLower = UDim2.new(0, 320, 1, -56),
+	UICorner = 16,
 	UIPadding = 14,
-	--ButtonPadding = 9,
 	Holder = nil,
 	NotificationIndex = 0,
 	Notifications = {},
+}
+
+-- Цвета и иконки для каждого типа уведомлений
+local TypeConfig = {
+	default = {
+		Color = Color3.fromHex("#6366f1"),
+		Icon = "bell",
+	},
+	success = {
+		Color = Color3.fromHex("#22c55e"),
+		Icon = "check-circle",
+	},
+	error = {
+		Color = Color3.fromHex("#ef4444"),
+		Icon = "x-circle",
+	},
+	warning = {
+		Color = Color3.fromHex("#f59e0b"),
+		Icon = "alert-triangle",
+	},
+	info = {
+		Color = Color3.fromHex("#0ea5e9"),
+		Icon = "info",
+	},
 }
 
 function NotificationModule.Init(Parent)
@@ -29,10 +52,6 @@ function NotificationModule.Init(Parent)
 		Size = NotificationModule.Size,
 		Parent = Parent,
 		BackgroundTransparency = 1,
-		--[[ScrollingDirection = "Y",
-        ScrollBarThickness = 0,
-        CanvasSize = UDim2.new(0,0,0,0),
-        AutomaticCanvasSize = "Y",--]]
 	}, {
 		New("UIListLayout", {
 			HorizontalAlignment = "Center",
@@ -42,16 +61,21 @@ function NotificationModule.Init(Parent)
 		}),
 		New("UIPadding", {
 			PaddingBottom = UDim.new(0, 116 / 4),
+			PaddingRight = UDim.new(0, 4),
 		}),
 	})
 	return NotModule
 end
 
 function NotificationModule.New(Config)
+	local notifType = Config.Type or "default"
+	local typeData = TypeConfig[notifType] or TypeConfig.default
+	local accentColor = Config.AccentColor or typeData.Color
+
 	local Notification = {
 		Title = Config.Title or "Notification",
 		Content = Config.Content or nil,
-		Icon = Config.Icon or nil,
+		Icon = Config.Icon or typeData.Icon,
 		IconThemed = Config.IconThemed,
 		Background = Config.Background,
 		BackgroundImageTransparency = Config.BackgroundImageTransparency,
@@ -60,58 +84,39 @@ function NotificationModule.New(Config)
 		CanClose = Config.CanClose ~= false,
 		UIElements = {},
 		Closed = false,
+		Type = notifType,
 	}
-	--[[if Notification.CanClose == nil then
-        Notification.CanClose = true
-    end--]]
+
 	NotificationModule.NotificationIndex = NotificationModule.NotificationIndex + 1
 	NotificationModule.Notifications[NotificationModule.NotificationIndex] = Notification
 
-	-- local UIStroke = New("UIStroke", {
-	--     ThemeTag = {
-	--         Color = "Text"
-	--     },
-	--     Transparency = 1, -- - .9
-	--     Thickness = .6,
-	-- })
-
+	-- Иконка уведомления
 	local Icon
-
-	if Notification.Icon then
-		-- if Creator.Icon(Notification.Icon) and Creator.Icon(Notification.Icon)[2] then
-		--     Icon = New("ImageLabel", {
-		--         Size = UDim2.new(0,26,0,26),
-		--         Position = UDim2.new(0,NotificationModule.UIPadding,0,NotificationModule.UIPadding),
-		--         BackgroundTransparency = 1,
-		--         Image = Creator.Icon(Notification.Icon)[1],
-		--         ImageRectSize = Creator.Icon(Notification.Icon)[2].ImageRectSize,
-		--         ImageRectOffset = Creator.Icon(Notification.Icon)[2].ImageRectPosition,
-		--         ThemeTag = {
-		--             ImageColor3 = "Text"
-		--         }
-		--     })
-		-- elseif string.find(Notification.Icon, "rbxassetid") then
-		--     Icon = New("ImageLabel", {
-		--         Size = UDim2.new(0,26,0,26),
-		--         BackgroundTransparency = 1,
-		--         Position = UDim2.new(0,NotificationModule.UIPadding,0,NotificationModule.UIPadding),
-		--         Image = Notification.Icon
-		--     })
-		-- end
-
+	local iconKey = Notification.Icon
+	if iconKey then
 		Icon = Creator.Image(
-			Notification.Icon,
-			Notification.Title .. ":" .. Notification.Icon,
+			iconKey,
+			(Notification.Title or "") .. ":" .. tostring(iconKey),
 			0,
 			Config.Window,
 			"Notification",
 			Notification.IconThemed
 		)
-		Icon.Size = UDim2.new(0, 26, 0, 26)
-		Icon.Position = UDim2.new(0, NotificationModule.UIPadding, 0, NotificationModule.UIPadding)
-		-- Icon.LayoutOrder = -1
+		if Icon then
+			Icon.Size = UDim2.new(0, 22, 0, 22)
+			Icon.Position = UDim2.new(
+				0,
+				NotificationModule.UIPadding + 4,
+				0,
+				NotificationModule.UIPadding + 2
+			)
+			if not Notification.IconThemed then
+				Icon.ImageColor3 = accentColor
+			end
+		end
 	end
 
+	-- Кнопка закрытия
 	local CloseButton
 	if Notification.CanClose then
 		local CloseIconData = Creator.Icon("x")
@@ -126,10 +131,10 @@ function NotificationModule.New(Config)
 			ThemeTag = {
 				ImageColor3 = "Text",
 			},
-			ImageTransparency = 0.4,
+			ImageTransparency = 0.5,
 		}, {
 			New("TextButton", {
-				Size = UDim2.new(1, 8, 1, 8),
+				Size = UDim2.new(1, 16, 1, 16),
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
@@ -138,36 +143,52 @@ function NotificationModule.New(Config)
 		})
 	end
 
-	local Duration = Creator.NewRoundFrame(NotificationModule.UICorner, "Squircle", {
-		Size = UDim2.new(0, 0, 1, 0),
-		ThemeTag = {
-			ImageTransparency = "NotificationDurationTransparency",
-			ImageColor3 = "NotificationDuration",
-		},
-		--Visible = false,
+	-- Полоса прогресса (таймер)
+	local DurationBar = New("Frame", {
+		Size = UDim2.new(1, 0, 0, 2),
+		Position = UDim2.new(0, 0, 1, -2),
+		BackgroundColor3 = accentColor,
+		BackgroundTransparency = 0.3,
+		BorderSizePixel = 0,
+	}, {
+		New("UICorner", {
+			CornerRadius = UDim.new(1, 0),
+		}),
 	})
 
+	-- Акцентная полоса слева
+	local AccentBar = New("Frame", {
+		Size = UDim2.new(0, 3, 1, -8),
+		Position = UDim2.new(0, 0, 0.5, 0),
+		AnchorPoint = Vector2.new(0, 0.5),
+		BackgroundColor3 = accentColor,
+		BorderSizePixel = 0,
+	}, {
+		New("UICorner", {
+			CornerRadius = UDim.new(1, 0),
+		}),
+	})
+
+	-- Блок с текстом
+	local iconOffset = iconKey and (22 + NotificationModule.UIPadding) or 0
 	local TextContainer = New("Frame", {
-		Size = UDim2.new(1, Notification.Icon and -28 - NotificationModule.UIPadding or 0, 1, 0),
-		Position = UDim2.new(1, 0, 0, 0),
-		AnchorPoint = Vector2.new(1, 0),
+		Size = UDim2.new(1, -(NotificationModule.UIPadding * 2 + 20 + iconOffset), 1, 0),
+		Position = UDim2.new(0, NotificationModule.UIPadding + 6 + iconOffset, 0, 0),
 		BackgroundTransparency = 1,
 		AutomaticSize = "Y",
 	}, {
 		New("UIPadding", {
-			PaddingTop = UDim.new(0, NotificationModule.UIPadding),
-			PaddingLeft = UDim.new(0, NotificationModule.UIPadding),
-			PaddingRight = UDim.new(0, NotificationModule.UIPadding),
-			PaddingBottom = UDim.new(0, NotificationModule.UIPadding),
+			PaddingTop = UDim.new(0, NotificationModule.UIPadding - 1),
+			PaddingBottom = UDim.new(0, NotificationModule.UIPadding - 1),
 		}),
 		New("TextLabel", {
 			AutomaticSize = "Y",
-			Size = UDim2.new(1, -30 - NotificationModule.UIPadding, 0, 0),
+			Size = UDim2.new(1, 0, 0, 0),
 			TextWrapped = true,
 			TextXAlignment = "Left",
 			RichText = true,
 			BackgroundTransparency = 1,
-			TextSize = 18,
+			TextSize = 14,
 			ThemeTag = {
 				TextColor3 = "NotificationTitle",
 				TextTransparency = "NotificationTitleTransparency",
@@ -176,7 +197,7 @@ function NotificationModule.New(Config)
 			FontFace = Font.new(Creator.Font, Enum.FontWeight.SemiBold),
 		}),
 		New("UIListLayout", {
-			Padding = UDim.new(0, NotificationModule.UIPadding / 3),
+			Padding = UDim.new(0, 4),
 		}),
 	})
 
@@ -188,8 +209,7 @@ function NotificationModule.New(Config)
 			TextXAlignment = "Left",
 			RichText = true,
 			BackgroundTransparency = 1,
-			--TextTransparency = .4,
-			TextSize = 15,
+			TextSize = 13,
 			ThemeTag = {
 				TextColor3 = "NotificationContent",
 				TextTransparency = "NotificationContentTransparency",
@@ -200,16 +220,77 @@ function NotificationModule.New(Config)
 		})
 	end
 
+	-- Кнопки действий
+	if Notification.Buttons and #Notification.Buttons > 0 then
+		local ButtonsFrame = New("Frame", {
+			AutomaticSize = "XY",
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 0, 0),
+			Parent = TextContainer,
+		}, {
+			New("UIListLayout", {
+				FillDirection = "Horizontal",
+				Padding = UDim.new(0, 6),
+			}),
+		})
+
+		for _, btnConfig in ipairs(Notification.Buttons) do
+			New("TextButton", {
+				AutomaticSize = "XY",
+				BackgroundColor3 = btnConfig.Primary and accentColor or Color3.fromHex("#2a2a2a"),
+				BackgroundTransparency = btnConfig.Primary and 0 or 0.5,
+				Text = btnConfig.Title or "Button",
+				TextSize = 12,
+				FontFace = Font.new(Creator.Font, Enum.FontWeight.SemiBold),
+				TextColor3 = Color3.fromHex("#ffffff"),
+				BorderSizePixel = 0,
+				Parent = ButtonsFrame,
+			}, {
+				New("UICorner", { CornerRadius = UDim.new(0, 8) }),
+				New("UIPadding", {
+					PaddingLeft = UDim.new(0, 10),
+					PaddingRight = UDim.new(0, 10),
+					PaddingTop = UDim.new(0, 5),
+					PaddingBottom = UDim.new(0, 5),
+				}),
+			}).MouseButton1Click:Connect(function()
+				if btnConfig.Callback then
+					btnConfig.Callback()
+				end
+				if btnConfig.CloseOnClick ~= false then
+					Notification:Close()
+				end
+			end)
+		end
+	end
+
+	-- Фоновое изображение (если есть)
+	local BGFrame
+	if Notification.Background then
+		BGFrame = New("ImageLabel", {
+			Name = "Background",
+			Image = Notification.Background,
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 1, 0),
+			ScaleType = "Crop",
+			ImageTransparency = Notification.BackgroundImageTransparency or 0.3,
+		}, {
+			New("UICorner", {
+				CornerRadius = UDim.new(0, NotificationModule.UICorner),
+			}),
+		})
+	end
+
+	-- Главный фрейм уведомления
 	local Main = Creator.NewRoundFrame(NotificationModule.UICorner, "Squircle", {
 		Size = UDim2.new(1, 0, 0, 0),
-		Position = UDim2.new(2, 0, 1, 0),
+		Position = UDim2.new(1, 20, 1, 0), -- начинает справа (за экраном)
 		AnchorPoint = Vector2.new(0, 1),
 		AutomaticSize = "Y",
-		ImageTransparency = 0.05,
+		ImageTransparency = 0.04,
 		ThemeTag = {
 			ImageColor3 = "Notification",
 		},
-		--ZIndex = 20
 	}, {
 		Creator.NewRoundFrame(NotificationModule.UICorner, "Squircle", {
 			Size = UDim2.new(1, 0, 1, 0),
@@ -218,43 +299,18 @@ function NotificationModule.New(Config)
 				ImageTransparency = "Notification2Transparency",
 			},
 		}),
+		-- Полоска снизу (таймер)
 		New("Frame", {
-			Size = UDim2.new(1, 0, 1, 0),
+			Size = UDim2.new(1, 0, 0, 2),
+			Position = UDim2.new(0, 0, 1, -2),
 			BackgroundTransparency = 1,
+			ClipsDescendants = true,
 			Name = "DurationFrame",
 		}, {
-			--[[Creator.NewRoundFrame(NotificationModule.UICorner, "SquircleOutline", {
-				Size = UDim2.new(1, 0, 1, 0),
-				ImageTransparency = 0.8,
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.new(0.5, 0, 0.5, 0),
-			}),]]
-			New("Frame", {
-				Size = UDim2.new(1, 0, 1, 0), -- 0,0,1,0
-				BackgroundTransparency = 1,
-				ClipsDescendants = true,
-			}, {
-				Duration,
-			}),
-
-			-- New("UICorner", {
-			--     CornerRadius = UDim.new(0,NotificationModule.UICorner),
-			-- })
+			DurationBar,
 		}),
-		New("ImageLabel", {
-			Name = "Background",
-			Image = Notification.Background,
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 1, 0),
-			ScaleType = "Crop",
-			ImageTransparency = Notification.BackgroundImageTransparency,
-			--ZIndex = 19,
-		}, {
-			New("UICorner", {
-				CornerRadius = UDim.new(0, NotificationModule.UICorner),
-			}),
-		}),
-
+		BGFrame,
+		AccentBar,
 		TextContainer,
 		Icon,
 		CloseButton,
@@ -268,53 +324,47 @@ function NotificationModule.New(Config)
 		Main,
 	})
 
+	-- Закрытие уведомления
 	function Notification:Close()
 		if not Notification.Closed then
 			Notification.Closed = true
-			Tween(
-				MainContainer,
-				0.45,
-				{ Size = UDim2.new(1, 0, 0, -8) },
-				Enum.EasingStyle.Quint,
-				Enum.EasingDirection.Out
-			):Play()
-			Tween(Main, 0.55, { Position = UDim2.new(2, 0, 1, 0) }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
-			task.wait(0.45)
+			Tween(MainContainer, 0.35, { Size = UDim2.new(1, 0, 0, -6) }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
+			Tween(Main, 0.4, { Position = UDim2.new(1, 20, 1, 0) }, Enum.EasingStyle.Quint, Enum.EasingDirection.In):Play()
+			task.wait(0.35)
 			MainContainer:Destroy()
 		end
 	end
 
+	-- Анимация появления
 	task.spawn(function()
 		task.wait()
-		Tween(
-			MainContainer,
-			0.45,
-			{ Size = UDim2.new(1, 0, 0, Main.AbsoluteSize.Y) },
-			Enum.EasingStyle.Quint,
-			Enum.EasingDirection.Out
-		):Play()
-		Tween(Main, 0.45, { Position = UDim2.new(0, 0, 1, 0) }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
+		local targetHeight = Main.AbsoluteSize.Y
+		Tween(MainContainer, 0.4, { Size = UDim2.new(1, 0, 0, targetHeight) }, Enum.EasingStyle.Quint, Enum.EasingDirection.Out):Play()
+		-- Слайд слева (красиво выезжает)
+		Tween(Main, 0.45, { Position = UDim2.new(0, 0, 1, 0) }, Enum.EasingStyle.Back, Enum.EasingDirection.Out):Play()
+
 		if Notification.Duration then
-			Duration.Size = UDim2.new(0, Main.DurationFrame.AbsoluteSize.X, 1, 0)
-			Tween(
-				Main.DurationFrame.Frame,
-				Notification.Duration,
-				{ Size = UDim2.new(0, 0, 1, 0) },
-				Enum.EasingStyle.Linear,
-				Enum.EasingDirection.InOut
-			):Play()
-			task.wait(Notification.Duration)
+			task.wait(0.45)
+			-- Анимация таймера
+			Tween(DurationBar, Notification.Duration - 0.45, { Size = UDim2.new(0, 0, 1, 0) }, Enum.EasingStyle.Linear):Play()
+			task.wait(Notification.Duration - 0.45)
 			Notification:Close()
 		end
 	end)
 
+	-- Hover эффект на кнопке закрытия
 	if CloseButton then
+		CloseButton.MouseEnter:Connect(function()
+			Tween(CloseButton, 0.1, { ImageTransparency = 0 }):Play()
+		end)
+		CloseButton.MouseLeave:Connect(function()
+			Tween(CloseButton, 0.1, { ImageTransparency = 0.5 }):Play()
+		end)
 		Creator.AddSignal(CloseButton.TextButton.MouseButton1Click, function()
 			Notification:Close()
 		end)
 	end
 
-	--Tween():Play()
 	return Notification
 end
 
